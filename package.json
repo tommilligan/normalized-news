@@ -1,0 +1,10 @@
+{
+  "name": "normalized-news",
+  "version": "0.0.1",
+  "description": "Read the news with anonymized people, locations and organizations.",
+  "author": "Tom Milligan <code@tommilligan.net>",
+  "private": false,
+  "dependencies": {
+    "ner": "^0.2.2"
+  }
+}
