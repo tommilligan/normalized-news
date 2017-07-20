@@ -5,6 +5,11 @@
   "author": "Tom Milligan <code@tommilligan.net>",
   "private": false,
   "dependencies": {
+    "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.2",
+    "eslint": "^4.2.0",
     "ner": "^0.2.2"
-  }
+  },
+  "devDependencies": {}
 }
