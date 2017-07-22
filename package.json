@@ -4,12 +4,36 @@
   "description": "Read the news with anonymized people, locations and organizations.",
   "author": "Tom Milligan <code@tommilligan.net>",
   "private": false,
+  "main": "./lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register -R spec",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register -R dot test/",
+    "compile": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tommilligan/normalized-news.git"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "cheerio": "^1.0.0-rc.2",
-    "eslint": "^4.2.0",
     "ner": "^0.2.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint-plugin-mocha": "^4.11.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.2",
+    "mocha-eslint": "^4.0.0"
+  }
 }

@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "node"
+  - "7"
+  - "6"
+  - "5"
+  - "4"
+install:
+  - yarn install
+before_script:
+  - npm run compile
+script:
+  - npm run coverage
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+branches:
+  except:
+    - /v\d+\.\d+\.\d+/
+notifications:
+  email: false
