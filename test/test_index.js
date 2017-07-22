@@ -18,6 +18,7 @@ describe('index.js', function(){
     });
     describe('normalizeNews functions', function(){
         it('work on a known BBC news article', function(){
+            this.timeout(5000);
             var text = 'http://www.bbc.co.uk/news/business-40658774';
             var expected = 'Six million men and women';
             var testFunction = () => {

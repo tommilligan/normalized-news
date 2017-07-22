@@ -1,14 +1,14 @@
 var axios = require('axios');
 var Promise = require('bluebird');
-
 var ner = require('ner');
 var cheerio = require('cheerio');
+require('dotenv-safe').load();
 
 var extractEntities = (inputText) => {
     return new Promise((resolve, reject) => {
         ner.get({
-            port:8080,
-            host:'localhost'
+            port: process.env.NORMNEWS_NER_SERVICE_PORT,
+            host: process.env.NORMNEWS_NER_SERVICE_HOST
         }, inputText, (err, res) => {
             if (err) {
                 console.error('Could not reach NER service');
