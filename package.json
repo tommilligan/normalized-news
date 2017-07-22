@@ -10,8 +10,10 @@
   },
   "scripts": {
     "compile": "babel src -d lib",
-    "test": "mocha --compilers js:babel-core/register -R spec",
-    "coverage": "cross-env NODE_ENV=test nyc mocha"
+    "test": "mocha",
+    "coverage": "cross-env NODE_ENV=test nyc mocha",
+    "unit": "mocha -R dot test/**/unit_*.js",
+    "integrate": "mocha test/**/integrate_*.js"
   },
   "nyc": {
     "require": [
