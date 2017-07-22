@@ -10,18 +10,19 @@ var gn = new Gender();
 
 // External services
 
-var extractEntities = (inputText) => {
+var connectionDefaults = {
+    port: process.env.NORMNEWS_NER_SERVICE_PORT,
+    host: process.env.NORMNEWS_NER_SERVICE_HOST
+};
+
+var extractEntities = (inputText, connection = connectionDefaults) => {
     return new Promise((resolve, reject) => {
-        var connection = {
-            port: process.env.NORMNEWS_NER_SERVICE_PORT,
-            host: process.env.NORMNEWS_NER_SERVICE_HOST
-        };
-        ner.get(connection, inputText, (err, res) => {
-            if (err) {
-                console.error(`Could not reach NER service; ${connection}`);
-                reject(err);
+        ner.get(connection, inputText, (ex, results) => {
+            if (ex) {
+                ex.message = 'Could not reach NER service; ' + ex.message;
+                reject(ex);
             } else {
-                resolve(res.entities);
+                resolve(results.entities);
             }
         });
     });
@@ -38,8 +39,9 @@ var article = (url) => {
                 var article = paragraphs.get().slice(11).join('\n\n');
                 resolve(article);
             })
-            .catch(error => {
-                reject(error);
+            .catch(ex => {
+                ex.message = 'Could not get article; ' + ex.message;
+                reject(ex);
             });
     });
 };
@@ -78,8 +80,6 @@ var normalize = (inputText) => {
         });
 };
 
-
-
 var normalizeNews = (url) => {
     return article(url)
         .then(rawText => {
@@ -87,4 +87,4 @@ var normalizeNews = (url) => {
         });
 };
 
-export {normalize, anonymize, normalizeNews};
+export {normalize, anonymize, normalizeNews, article, extractEntities};
