@@ -6,14 +6,12 @@ var expect = chai.expect;
 import {normalize, anonymize, normalizeNews} from '../src/index';
 
 describe('index.js', function(){
-    it('pass', function(){
-        expect(true).to.be.true;
-    });
     describe('anonymize', function(){
         it('should replace named entities', function(){
             var text = 'John Smith went to Tesco to buy carrots for dinner.';
+            var entities = {'PERSON': ['John Smith'], 'ORGANIZATION': ['Tesco'], 'LOCATION':[]};
             var expected = 'PERSON went to ORGANIZATION to buy carrots for dinner.';
-            return expect(anonymize(text)).to.eventually.equal(expected);
+            return expect(anonymize(text, entities)).to.eventually.equal(expected);
         });
     });
     describe('normalize', function(){

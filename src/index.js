@@ -46,25 +46,33 @@ var article = (url) => {
 
 // Text manipulation functions
 
-var anonymize = (inputText) => {
-    return extractEntities(inputText)
-        .then(entities => {
-            var normalizedText = (' ' + inputText).slice(1);
-            var toReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
-            toReplace.map(namedEntityType => {
-                var foundEntities = entities[namedEntityType];
-                if (foundEntities) {
-                    foundEntities.map(foundEntity => {
-                        normalizedText = normalizedText.replace(new RegExp(foundEntity), namedEntityType);
-                    });
-                }
-            });
-            return normalizedText;
+/**
+ * Replace named identities in the input text
+ * 
+ * @param {string} inputText 
+ * @param {object} entities object of the form {PERSON: ['Foo Bar'], ORGANISATION: [], LOCATION: ['Vulcan']}
+ */
+var anonymize = (inputText, entities) => {
+    var toReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
+    return new Promise((resolve) => {
+        var normalizedText = (' ' + inputText).slice(1);
+        toReplace.map(namedEntityType => {
+            var foundEntities = entities[namedEntityType];
+            if (foundEntities) {
+                foundEntities.map(foundEntity => {
+                    normalizedText = normalizedText.replace(new RegExp(foundEntity), namedEntityType);
+                });
+            }
         });
+        resolve(normalizedText);
+    });
 };
 
 var normalize = (inputText) => {
-    return anonymize(inputText)
+    return extractEntities(inputText)
+        .then(entities => {
+            return anonymize(inputText, entities);
+        })
         .then(normalText => {
             return gn.neutralize(normalText);
         });
