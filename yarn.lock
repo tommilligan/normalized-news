@@ -1396,9 +1396,9 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-"gender-neutral@git+https://github.com/tommilligan/gender-neutral#develop":
+"gender-neutral@https://github.com/tommilligan/gender-neutral#develop":
   version "0.1.0"
-  resolved "git+https://github.com/tommilligan/gender-neutral#83ad9b292d1301332e1ed55f35336de617d20389"
+  resolved "https://github.com/tommilligan/gender-neutral#83ad9b292d1301332e1ed55f35336de617d20389"
   dependencies:
     postinstall-build "^5.0.1"
 
