@@ -12,7 +12,7 @@
     "compile": "babel src -d lib",
     "test": "mocha",
     "coverage": "cross-env NODE_ENV=test nyc mocha",
-    "unit": "mocha -R dot test/**/unit_*.js",
+    "unit": "mocha test/**/unit_*.js",
     "integrate": "mocha test/**/integrate_*.js"
   },
   "nyc": {
@@ -53,6 +53,8 @@
     "istanbul": "1.0.0-alpha.2",
     "mocha": "^3.4.2",
     "mocha-eslint": "^4.0.0",
-    "nyc": "^11.0.3"
+    "nyc": "^11.0.3",
+    "sinon": "^2.3.8",
+    "sinon-chai": "^2.12.0"
   }
 }

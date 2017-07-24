@@ -1,58 +1,22 @@
-var axios = require('axios');
-var Promise = require('bluebird');
-var ner = require('ner');
-var cheerio = require('cheerio');
-var Gender = require('gender-neutral');
-
 require('dotenv-safe').load();
 
+var Promise = require('bluebird');
+var Gender = require('gender-neutral');
+
+var services = require('./services');
+
 var gn = new Gender();
-
-// External services
-
-var connectionDefaults = {
-    port: process.env.NORMNEWS_NER_SERVICE_PORT,
-    host: process.env.NORMNEWS_NER_SERVICE_HOST
-};
-
-var extractEntities = (inputText, connection = connectionDefaults) => {
-    return new Promise((resolve, reject) => {
-        ner.get(connection, inputText, (ex, results) => {
-            if (ex) {
-                ex.message = 'Could not reach NER service; ' + ex.message;
-                reject(ex);
-            } else {
-                resolve(results.entities);
-            }
-        });
-    });
-};
-
-var article = (url) => {
-    return new Promise((resolve, reject) => {
-        axios.get(url)
-            .then(response => {
-                var $ = cheerio.load(response.data);
-                var paragraphs = $('p').map((i, el) => {
-                    return $(el).text();
-                });
-                var article = paragraphs.get().slice(11).join('\n\n');
-                resolve(article);
-            })
-            .catch(ex => {
-                ex.message = 'Could not get article; ' + ex.message;
-                reject(ex);
-            });
-    });
-};
 
 // Text manipulation functions
 
 /**
- * Replace named identities in the input text
+ * Replace named identities in the input text (does not require NER service)
  * 
  * @param {string} inputText 
- * @param {object} entities object of the form {PERSON: ['Foo Bar'], ORGANISATION: [], LOCATION: ['Vulcan']}
+ * @param {object} entities - named entities to replace in text
+ * @param {string[]} entities.PERSON
+ * @param {string[]} entities.LOCATION
+ * @param {string[]} entities.ORGANISATION
  */
 var anonymize = (inputText, entities) => {
     var toReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
@@ -70,21 +34,33 @@ var anonymize = (inputText, entities) => {
     });
 };
 
+/**
+ * Thin wrapper for gender-neutral
+ * 
+ * @param {string} inputText 
+ */
+var neutralize = (inputText) => {
+    return gn.neutralize(inputText);
+};
+
+
+// End to end journeys
+
 var normalize = (inputText) => {
-    return extractEntities(inputText)
+    return services.extractEntities(inputText)
         .then(entities => {
             return anonymize(inputText, entities);
         })
         .then(normalText => {
-            return gn.neutralize(normalText);
+            return neutralize(normalText);
         });
 };
 
 var normalizeNews = (url) => {
-    return article(url)
+    return services.article(url)
         .then(rawText => {
             return normalize(rawText);
         });
 };
 
-export {normalize, anonymize, normalizeNews, article, extractEntities};
+export {normalize, neutralize, anonymize, normalizeNews};
