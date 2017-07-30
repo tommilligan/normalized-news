@@ -6,25 +6,28 @@ var sinon = require('sinon');
 var sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
+var passes = require('../src/passes');
 var normalizedNews = require('../src/index');
-var services = require('../src/services');
 
 describe('unit_index.js', function(){
     describe('normalize', function(){
+        var stubAnon;
+        var stubNeut;
         beforeEach(function() {
-            var stubReturn = {PERSON: ['John Smith'], ORGANIZATION: [], LOCATION: []};
-            sinon.stub(services, 'extractEntities').returns(
-                new Promise((resolve) => {
-                    resolve(stubReturn);
-                }));
+            stubAnon = sinon.stub(passes, 'anonymize').resolves('spam');
+            stubNeut = sinon.stub(passes, 'neutralize').resolves('eggs');
         });
         afterEach(function() {
-            services.extractEntities.restore();
+            stubAnon.restore();
+            stubNeut.restore();
         });
-        it('should replace named entities and neutralize pronouns', function(){
-            var text = 'She said that John Smith\'s company had decided to sue.';
-            var expected = 'They said that Person-A\'s company had decided to sue.';
-            return expect(normalizedNews.normalize(text)).to.eventually.equal(expected);
+        it('should run through all passes', function(){
+            var normal = normalizedNews.normalize('eels');
+            return Promise.all([
+                expect(normal).to.eventually.equal('eggs'),
+                normal.then(() => expect(stubAnon).to.have.been.calledWith('eels')),
+                normal.then(() => expect(stubNeut).to.have.been.calledWith('spam'))
+            ]);
         });
     });
 });
