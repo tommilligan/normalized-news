@@ -10,7 +10,7 @@ describe('unit_passes.js', function(){
         it('should replace named entities', function(){
             var text = 'John Smith went to Tesco to buy carrots for dinner.';
             var entities = {'PERSON': ['John Smith'], 'ORGANIZATION': ['Tesco']};
-            var expected = 'Person-A went to Organization-Aqua to buy carrots for dinner.';
+            var expected = 'Person-A went to Organization-Aquamarine to buy carrots for dinner.';
             return expect(anonymize(text, entities)).to.eventually.equal(expected);
         });
     });

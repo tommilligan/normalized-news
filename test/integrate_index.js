@@ -17,7 +17,7 @@ describe('integrate_index.js', function(){
         it('works on a known BBC news article', function(){
             this.timeout(5000);
             var text = 'http://www.bbc.co.uk/news/business-40658774';
-            var expected = 'de in the Commons by the Organization-Aqua for Work and Pensions, Person-A.\n\nThey said the governmen';
+            var expected = 'de in the Commons by the Organization-Aquamarine for Work and Pensions, Person-A.\n\nThey said the governmen';
             var testFunction = () => {
                 return normalizeNews(text)
                     .then(article => {

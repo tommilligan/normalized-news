@@ -41,70 +41,53 @@ var intAsChars = (i) => {
 /**
  * Convert an integer into a character representation, e.g.
  * 
- * 0 => Aqua
- * 50 => Yellow
- * 51 => AntiqueAqua
+ * 0 => Aquamarine
+ * 35 => Yellow
  * 
  * @param {int} i 
  */
 var intAsColorString = (i) => {
     logger.silly('Converting integer to color');
     var dictionary = [
-        'Aqua',
         'Aquamarine',
         'Azure',
         'Beige',
-        'Bisque',
         'Black',
         'Blue',
         'Brown',
-        'Chartreuse',
         'Chocolate',
         'Coral',
-        'Cornsilk',
         'Crimson',
         'Cyan',
         'Fuchsia',
-        'Gainsboro',
         'Gold',
         'Gray',
-        'Grey',
         'Green',
         'Indigo',
         'Ivory',
         'Khaki',
         'Lavender',
         'Lime',
-        'Linen',
         'Magenta',
         'Maroon',
-        'Moccasin',
         'Navy',
         'Olive',
         'Orange',
-        'Orchid',
-        'Peru',
         'Pink',
         'Plum',
         'Purple',
         'Red',
         'Salmon',
-        'Sienna',
         'Silver',
-        'Snow',
         'Tan',
         'Teal',
-        'Thistle',
-        'Tomato',
         'Turquoise',
         'Violet',
-        'Wheat',
         'White',
         'Yellow'
     ];
     var recursiveDictionary = [
         'Antique',
-        'Blanched',
         'Dark',
         'Deep',
         'Dim',

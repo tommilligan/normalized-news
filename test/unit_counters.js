@@ -19,13 +19,13 @@ describe('unit_counters.js', function(){
     });
     describe('intAsColorString', function(){
         it('converts integers to simple HTML colors', function() {
-            expect(intAsColorString(0)).to.equal('Aqua');
-            expect(intAsColorString(42)).to.equal('Tan');
-            expect(intAsColorString(50)).to.equal('Yellow');
+            expect(intAsColorString(0)).to.equal('Aquamarine');
+            expect(intAsColorString(20)).to.equal('Maroon');
+            expect(intAsColorString(35)).to.equal('Yellow');
         });
         it('converts integers to multiple characters', function() {
-            expect(intAsColorString(51)).to.equal('AntiqueAqua');
-            expect(intAsColorString(511)).to.equal('PowderAquamarine');
+            expect(intAsColorString(51)).to.equal('AntiqueIvory');
+            expect(intAsColorString(511)).to.equal('AntiqueDeepCoral');
         });
     });
 });

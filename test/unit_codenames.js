@@ -13,7 +13,7 @@ describe('unit_codenames.js', function(){
         });
         it('convert organizations to colors', function() {
             expect(provideCodenames({ORGANIZATION: ['Tescos']}))
-                .to.deep.equal([{entity: 'Tescos', codename: 'Organization-Aqua'}]);
+                .to.deep.equal([{entity: 'Tescos', codename: 'Organization-Aquamarine'}]);
         });
         it('convert locations to numbers', function() {
             expect(provideCodenames({LOCATION: ['London']}))

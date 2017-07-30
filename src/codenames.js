@@ -15,7 +15,7 @@ var defaultCodenamingCounters = {
  * 
  * [
  *     ['Tom', 'Person-A'].
- *     ['Tescos', 'Organization-Aqua'],
+ *     ['Tescos', 'Organization-Aquamarine'],
  *     ['London', 'Location-1']
  * ]
  * 
