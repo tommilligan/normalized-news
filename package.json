@@ -12,6 +12,7 @@
     "compile": "babel src -d lib",
     "test": "mocha",
     "coverage": "cross-env NODE_ENV=test nyc mocha",
+    "unit-cover": "cross-env NODE_ENV=test nyc mocha test/**/unit_*.js",
     "unit": "mocha test/**/unit_*.js",
     "integrate": "mocha test/**/integrate_*.js"
   },
