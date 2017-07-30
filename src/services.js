@@ -1,15 +1,19 @@
+require('dotenv-safe').load();
 var axios = require('axios');
 var Promise = require('bluebird');
 var cheerio = require('cheerio');
+import * as _ from 'lodash';
 
 import logger from './logger';
 
+var nervousEfficientRebelUrl = `http://${process.env.NERVOUS_EFFICIENT_REBEL_HOST}:${process.env.NERVOUS_EFFICIENT_REBEL_PORT}/`;
+
 // External services
 var extractEntities = (inputText) => {
-    logger.debug('Connecting to nervous-efficient-rebel for entity extraction');
+    logger.debug('Connecting to nervous-efficient-rebel at %s', nervousEfficientRebelUrl);
     return axios({
         method: 'post',
-        url: `http://${process.env.NERVOUS_EFFICIENT_REBEL_HOST}:${process.env.NERVOUS_EFFICIENT_REBEL_PORT}/`,
+        url: nervousEfficientRebelUrl,
         data: {payload: inputText},
         headers: {'Content-Type': 'application/json'}
     })
@@ -20,7 +24,6 @@ var extractEntities = (inputText) => {
         })
         .catch(error => {
             logger.error('Error with nervous-efficient-rebel service');
-            logger.info(error);
             throw error;
         });
 };
@@ -45,7 +48,9 @@ var article = (url) => {
                         return $(el).text();
                     });
                 // join plaintext together
-                var article = paragraphs.get().join('\n\n');
+                var article = paragraphs.get().filter(paragraph => {
+                    return _.trim(paragraph) !== '';
+                }).join('\n\n');
                 logger.silly('Retrieved article, %d characters', article.length);
                 resolve(article);
             })
