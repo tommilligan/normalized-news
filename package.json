@@ -38,6 +38,7 @@
     "dotenv-safe": "^4.0.4",
     "express": "^4.15.3",
     "gender-neutral": "https://github.com/tommilligan/gender-neutral#develop",
+    "lodash": "^4.17.4",
     "moxios": "^0.4.0",
     "winston": "^2.3.1",
     "winston-express": "^0.1.1"

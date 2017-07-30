@@ -23,7 +23,7 @@ describe('unit_index.js', function(){
         });
         it('should replace named entities and neutralize pronouns', function(){
             var text = 'She said that John Smith\'s company had decided to sue.';
-            var expected = 'They said that PERSON\'s company had decided to sue.';
+            var expected = 'They said that Person-A\'s company had decided to sue.';
             return expect(normalizedNews.normalize(text)).to.eventually.equal(expected);
         });
     });

@@ -1,23 +1,19 @@
 require('dotenv-safe').load();
 
-var services = require('./services');
-var passes = require('./passes');
-
+import {anonymize, neutralize} from './passes';
+import {article} from './services';
 
 // End to end journeys
 
 var normalize = (inputText) => {
-    return services.extractEntities(inputText)
-        .then(entities => {
-            return passes.anonymize(inputText, entities);
-        })
-        .then(normalText => {
-            return passes.neutralize(normalText);
+    return anonymize(inputText)
+        .then(anonText => {
+            return neutralize(anonText);
         });
 };
 
 var normalizeNews = (url) => {
-    return services.article(url)
+    return article(url)
         .then(rawText => {
             return normalize(rawText);
         });

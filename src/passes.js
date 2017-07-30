@@ -1,11 +1,14 @@
-var Promise = require('bluebird');
+import * as _ from 'lodash';
+
+var services = require('./services');
 var Gender = require('gender-neutral');
 
 var gn = new Gender();
 
+import {provideCodenames} from './codenames';
+
 // Manipulation functions to pass over text
 
-var entitiesToReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
 /**
  * Replace named identities in the input text (does not require NER service)
  * 
@@ -15,19 +18,16 @@ var entitiesToReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
  * @param {string[]} entities.LOCATION
  * @param {string[]} entities.ORGANISATION
  */
-var anonymize = (inputText, entities) => {
-    return new Promise((resolve) => {
-        var normalizedText = (' ' + inputText).slice(1);
-        entitiesToReplace.map(namedEntityType => {
-            var foundEntities = entities[namedEntityType];
-            if (foundEntities) {
-                foundEntities.map(foundEntity => {
-                    normalizedText = normalizedText.replace(new RegExp(foundEntity), namedEntityType);
-                });
-            }
+var anonymize = (inputText) => {
+    return services.extractEntities(inputText)
+        .then(entities => {
+            var normalizedText = _.clone(inputText);
+            var codenamePairs = provideCodenames(entities);
+            codenamePairs.map(codenamePair => {
+                normalizedText = normalizedText.replace(new RegExp(codenamePair.entity), codenamePair.codename);
+            });
+            return normalizedText;
         });
-        resolve(normalizedText);
-    });
 };
 
 /**

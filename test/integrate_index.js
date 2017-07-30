@@ -9,7 +9,7 @@ describe('integrate_index.js', function(){
     describe('normalizeNews function', function(){
         it('should replace named entities and neutralize pronouns', function(){
             var text = 'She said that John Smith\'s company had decided to sue.';
-            var expected = 'They said that PERSON\'s company had decided to sue.';
+            var expected = 'They said that Person-A\'s company had decided to sue.';
             return expect(normalize(text)).to.eventually.equal(expected);
         });
     });
@@ -17,7 +17,7 @@ describe('integrate_index.js', function(){
         it('works on a known BBC news article', function(){
             this.timeout(5000);
             var text = 'http://www.bbc.co.uk/news/business-40658774';
-            var expected = 'de in the Commons by the ORGANIZATION for Work and Pensions, PERSON.\n\nThey said the government had d';
+            var expected = 'de in the Commons by the Organization-Aqua for Work and Pensions, Person-A.\n\nThey said the governmen';
             var testFunction = () => {
                 return normalizeNews(text)
                     .then(article => {
