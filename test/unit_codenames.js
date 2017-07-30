@@ -25,7 +25,7 @@ describe('unit_codenames.js', function(){
         });
     });
     it('will accept custom functions', function(){
-        expect(provideCodenames({PERSON: ['Tom', 'Dick', 'Harry']}, {PERSON: i => i**2}))
+        expect(provideCodenames({PERSON: ['Tom', 'Dick', 'Harry']}, {PERSON: i => Math.pow(i, 2)}))
             .to.deep.equal([
                 {entity: 'Tom', codename: 'Person-0'},
                 {entity: 'Dick', codename: 'Person-1'},
