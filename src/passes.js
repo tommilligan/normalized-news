@@ -26,7 +26,7 @@ var anonymize = (inputText) => {
             var normalizedText = _.clone(inputText);
             var codenamePairs = provideCodenames(entities);
             codenamePairs.map(codenamePair => {
-                normalizedText = normalizedText.replace(new RegExp(codenamePair.entity), codenamePair.codename);
+                normalizedText = normalizedText.replace(new RegExp(codenamePair.entity, 'g'), codenamePair.codename);
             });
             return normalizedText;
         });
