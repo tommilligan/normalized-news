@@ -82,7 +82,7 @@ describe('integrate_services.js', function(){
             return expect(extractEntities(text)).to.eventually.deep.equal(stubJson);
         });
     });
-    describe('nocked offline', function(){
+    describe('axios mocked offline', function(){
         beforeEach(function(){
             moxios.install(axios);
         });

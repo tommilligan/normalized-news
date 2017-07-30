@@ -5,6 +5,7 @@ var gn = new Gender();
 
 // Manipulation functions to pass over text
 
+var entitiesToReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
 /**
  * Replace named identities in the input text (does not require NER service)
  * 
@@ -15,10 +16,9 @@ var gn = new Gender();
  * @param {string[]} entities.ORGANISATION
  */
 var anonymize = (inputText, entities) => {
-    var toReplace = ['PERSON', 'LOCATION', 'ORGANIZATION'];
     return new Promise((resolve) => {
         var normalizedText = (' ' + inputText).slice(1);
-        toReplace.map(namedEntityType => {
+        entitiesToReplace.map(namedEntityType => {
             var foundEntities = entities[namedEntityType];
             if (foundEntities) {
                 foundEntities.map(foundEntity => {
