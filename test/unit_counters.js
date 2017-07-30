@@ -3,18 +3,18 @@ var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect;
 
-import {intAsCharString, intAsColorString} from '../src/counters';
+import {intAsChars, intAsColorString} from '../src/counters';
 
 describe('unit_counters.js', function(){
-    describe('intAsCharString', function(){
+    describe('intAsChars', function(){
         it('converts integers to single characters', function() {
-            expect(intAsCharString(0)).to.equal('A');
-            expect(intAsCharString(3)).to.equal('D');
-            expect(intAsCharString(25)).to.equal('Z');
+            expect(intAsChars(0)).to.equal('A');
+            expect(intAsChars(3)).to.equal('D');
+            expect(intAsChars(25)).to.equal('Z');
         });
         it('converts integers to multiple characters', function() {
-            expect(intAsCharString(26)).to.equal('AA');
-            expect(intAsCharString((26 * 27) - 1)).to.equal('ZZ');
+            expect(intAsChars(26)).to.equal('AA');
+            expect(intAsChars((26 * 27) - 1)).to.equal('ZZ');
         });
     });
     describe('intAsColorString', function(){

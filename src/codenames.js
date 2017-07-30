@@ -1,10 +1,11 @@
 import * as _ from 'lodash';
 
-import {intAsCharString, intAsColorString} from './counters';
+import logger from './logger';
+import {intAsChars, intAsColorString} from './counters';
 import {entitiesToReplace} from './constants';
 
 var defaultCodenamingCounters = {
-    PERSON: intAsCharString,
+    PERSON: intAsChars,
     ORGANIZATION: intAsColorString,
     LOCATION: i => i
 };
@@ -21,22 +22,26 @@ var defaultCodenamingCounters = {
  * @param {*} entities An entites object returned by Stanford NER
  */
 var provideCodenames = (entities, codenamingCounters = defaultCodenamingCounters) => {
+    logger.debug('Providing codenames');
     var codenames = [];
     entitiesToReplace.map(namedEntityType => {
         var foundEntities = entities[namedEntityType];
         var codenamingCounter = codenamingCounters[namedEntityType];
         if (codenamingCounter) {
+            logger.debug('Codenaming %ss', namedEntityType);
             if (foundEntities) {
                 var uniqueEntities = _.uniq(foundEntities);
                 uniqueEntities.map((entity, i) => {
                     var codenameStatic = _.startCase(_.lowerCase(namedEntityType));
                     var codenameDynamic = codenamingCounters[namedEntityType](i);
                     var codename = `${codenameStatic}-${codenameDynamic}`;
-                    codenames.push({entity: entity, codename: codename});
+                    var codenamePair = {entity: entity, codename: codename};
+                    logger.silly('Provided codename %j', codenamePair);
+                    codenames.push(codenamePair);
                 });
             }
         } else {
-            console.warn(`Codenaming function for ${namedEntityType} not found. Anonymization will be incomplete`);
+            logger.warn(`Codenaming function for ${namedEntityType} not found. Anonymization will be incomplete`);
         }
     });
     return codenames;

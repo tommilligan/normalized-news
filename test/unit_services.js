@@ -105,7 +105,7 @@ describe('integrate_services.js', function(){
                         return article.slice(0, 200);
                     });
             };
-            return expect(testFunction()).to.eventually.be.rejectedWith('Could not get article');
+            return expect(testFunction()).to.eventually.be.rejected;
         });
         it('extractEntities will fail', function(){
             var text = 'John Smith went to Tesco and bought spam';

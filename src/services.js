@@ -2,8 +2,11 @@ var axios = require('axios');
 var Promise = require('bluebird');
 var cheerio = require('cheerio');
 
+import logger from './logger';
+
 // External services
 var extractEntities = (inputText) => {
+    logger.debug('Connecting to nervous-efficient-rebel for entity extraction');
     return axios({
         method: 'post',
         url: `http://${process.env.NERVOUS_EFFICIENT_REBEL_HOST}:${process.env.NERVOUS_EFFICIENT_REBEL_PORT}/`,
@@ -14,12 +17,14 @@ var extractEntities = (inputText) => {
             return response.data;
         })
         .catch(error => {
-            console.error(error);
+            logger.error('Error with nervous-efficient-rebel service');
+            logger.debug(error);
             throw error;
         });
 };
 
 var article = (url) => {
+    logger.debug('Retrieving news article');
     return new Promise((resolve, reject) => {
         axios.get(url)
             .then(response => {
@@ -41,7 +46,8 @@ var article = (url) => {
                 resolve(article);
             })
             .catch(ex => {
-                ex.message = 'Could not get article; ' + ex.message;
+                logger.error('Could not get news article');
+                logger.debug(ex);
                 reject(ex);
             });
     });

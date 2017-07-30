@@ -5,6 +5,7 @@ var Gender = require('gender-neutral');
 
 var gn = new Gender();
 
+import logger from './logger';
 import {provideCodenames} from './codenames';
 
 // Manipulation functions to pass over text
@@ -19,6 +20,7 @@ import {provideCodenames} from './codenames';
  * @param {string[]} entities.ORGANISATION
  */
 var anonymize = (inputText) => {
+    logger.debug('Anonymizing text');
     return services.extractEntities(inputText)
         .then(entities => {
             var normalizedText = _.clone(inputText);
@@ -36,6 +38,7 @@ var anonymize = (inputText) => {
  * @param {string} inputText 
  */
 var neutralize = (inputText) => {
+    logger.debug('Neutralizing text');
     return gn.neutralize(inputText);
 };
 

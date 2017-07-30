@@ -1,3 +1,4 @@
+import logger from './logger';
 
 /**
  * Convert an integer into a character representation, e.g.
@@ -15,7 +16,7 @@ var intAsDict = (i, dictionary, recursiveDictionary) => {
     var stem = '';
     // if greater than length of the dictionary, recurse
     if (i >= dictLength ) {
-        stem = intAsDict((i / dictLength >> 0) -1, recursiveDictionary || dictionary, undefined)
+        stem = intAsDict((i / dictLength >> 0) -1, recursiveDictionary || dictionary, undefined);
     }
     // otherwise, convert
     var leaf = dictionary[i % dictLength >> 0];
@@ -32,7 +33,8 @@ var intAsDict = (i, dictionary, recursiveDictionary) => {
  * 
  * @param {int} i 
  */
-var intAsCharString = (i) => {
+var intAsChars = (i) => {
+    logger.silly('Converting integer to characters');
     return intAsDict(i, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 };
 
@@ -46,6 +48,7 @@ var intAsCharString = (i) => {
  * @param {int} i 
  */
 var intAsColorString = (i) => {
+    logger.silly('Converting integer to color');
     var dictionary = [
         'Aqua',
         'Aquamarine',
@@ -116,4 +119,4 @@ var intAsColorString = (i) => {
     return intAsDict(i, dictionary, recursiveDictionary);
 };
 
-export {intAsCharString, intAsColorString};
+export {intAsChars, intAsColorString};
