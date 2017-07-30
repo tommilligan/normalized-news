@@ -14,11 +14,13 @@ var extractEntities = (inputText) => {
         headers: {'Content-Type': 'application/json'}
     })
         .then(response => {
-            return response.data;
+            var entities = response.data;
+            logger.silly('Extracted entities %j', entities);
+            return entities;
         })
         .catch(error => {
             logger.error('Error with nervous-efficient-rebel service');
-            logger.debug(error);
+            logger.info(error);
             throw error;
         });
 };
@@ -37,17 +39,19 @@ var article = (url) => {
                     .not('.twite__channel-text')
                     .not('.twite__copy-text')
                     .not('.twite__new-window')
+                    .not('.top-stories-promo-story__summary')
                     // select text content
                     .map((i, el) => {
                         return $(el).text();
                     });
                 // join plaintext together
                 var article = paragraphs.get().join('\n\n');
+                logger.silly('Retrieved article, %d characters', article.length);
                 resolve(article);
             })
             .catch(ex => {
                 logger.error('Could not get news article');
-                logger.debug(ex);
+                logger.info(ex);
                 reject(ex);
             });
     });
