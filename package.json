@@ -33,13 +33,10 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
-    "bluebird": "^3.5.0",
     "cheerio": "^1.0.0-rc.2",
-    "dotenv-safe": "^4.0.4",
     "express": "^4.15.3",
     "gender-fluid": "^0.0.5",
     "lodash": "^4.17.4",
-    "moxios": "^0.4.0",
     "winston": "^2.3.1",
     "winston-express": "^0.1.1"
   },
@@ -54,10 +51,12 @@
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
     "cross-env": "^5.0.1",
+    "dotenv-safe": "^4.0.4",
     "eslint-plugin-mocha": "^4.11.0",
     "istanbul": "1.0.0-alpha.2",
     "mocha": "^3.4.2",
     "mocha-eslint": "^4.0.0",
+    "moxios": "^0.4.0",
     "nyc": "^11.0.3",
     "sinon": "^2.3.8",
     "sinon-chai": "^2.12.0"

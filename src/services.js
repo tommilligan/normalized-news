@@ -1,5 +1,4 @@
 var axios = require('axios');
-var Promise = require('bluebird');
 var cheerio = require('cheerio');
 import * as _ from 'lodash';
 
