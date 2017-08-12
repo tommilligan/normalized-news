@@ -1,13 +1,3 @@
-import winston from 'winston';
+const debug = require('debug')('normalized-news');
 
-winston.remove(winston.transports.Console);
-winston.add(winston.transports.Console, { level: 'silly', colorize:true });
-winston.add(winston.transports.File, {
-    level: 'info',
-    filename: 'normalized-news.log',
-    name: 'custom-log',
-    handleExceptions: true,
-    humanReadableUnhandledException: true
-});
-
-export default winston;
+export default debug;

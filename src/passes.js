@@ -20,7 +20,7 @@ import {provideCodenames} from './codenames';
  * @param {string[]} entities.ORGANISATION
  */
 var anonymize = (inputText) => {
-    logger.debug('Anonymizing text');
+    logger('Anonymizing text');
     return services.extractEntities(inputText)
         .then(entities => {
             var normalizedText = _.clone(inputText);
@@ -38,7 +38,7 @@ var anonymize = (inputText) => {
  * @param {string} inputText 
  */
 var neutralize = (inputText) => {
-    logger.debug('Neutralizing text');
+    logger('Neutralizing text');
     return gn.fluidize(inputText);
 };
 

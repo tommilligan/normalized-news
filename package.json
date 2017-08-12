@@ -34,11 +34,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "cheerio": "^1.0.0-rc.2",
+    "debug": "^3.0.0",
     "express": "^4.15.3",
     "gender-fluid": "^0.0.5",
-    "lodash": "^4.17.4",
-    "winston": "^2.3.1",
-    "winston-express": "^0.1.1"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

@@ -22,13 +22,13 @@ var defaultCodenamingCounters = {
  * @param {*} entities An entites object returned by Stanford NER
  */
 var provideCodenames = (entities, codenamingCounters = defaultCodenamingCounters) => {
-    logger.debug('Providing codenames');
+    logger('Providing codenames');
     var codenames = [];
     entitiesToReplace.map(namedEntityType => {
         var foundEntities = entities[namedEntityType];
         var codenamingCounter = codenamingCounters[namedEntityType];
         if (codenamingCounter) {
-            logger.debug('Codenaming %ss', namedEntityType);
+            logger('Codenaming %ss', namedEntityType);
             if (foundEntities) {
                 var uniqueEntities = _.uniq(foundEntities);
                 uniqueEntities.map((entity, i) => {
@@ -36,12 +36,12 @@ var provideCodenames = (entities, codenamingCounters = defaultCodenamingCounters
                     var codenameDynamic = codenamingCounters[namedEntityType](i);
                     var codename = `${codenameStatic}-${codenameDynamic}`;
                     var codenamePair = {entity: entity, codename: codename};
-                    logger.silly('Provided codename %j', codenamePair);
+                    logger('Provided codename %j', codenamePair);
                     codenames.push(codenamePair);
                 });
             }
         } else {
-            logger.warn(`Codenaming function for ${namedEntityType} not found. Anonymization will be incomplete`);
+            logger(`Codenaming function for ${namedEntityType} not found. Anonymization will be incomplete`);
         }
     });
     return codenames;

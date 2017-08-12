@@ -34,7 +34,7 @@ var intAsDict = (i, dictionary, recursiveDictionary) => {
  * @param {int} i 
  */
 var intAsChars = (i) => {
-    logger.silly('Converting integer to characters');
+    logger('Converting integer to characters');
     return intAsDict(i, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
 };
 
@@ -47,7 +47,7 @@ var intAsChars = (i) => {
  * @param {int} i 
  */
 var intAsColorString = (i) => {
-    logger.silly('Converting integer to color');
+    logger('Converting integer to color');
     var dictionary = [
         'Aquamarine',
         'Azure',

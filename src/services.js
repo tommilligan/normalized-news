@@ -8,7 +8,7 @@ import logger from './logger';
 // External services
 var extractEntities = (inputText) => {
     var nervousEfficientRebelUrl = `http://${process.env.NERVOUS_EFFICIENT_REBEL_HOST}:${process.env.NERVOUS_EFFICIENT_REBEL_PORT}/`;
-    logger.debug('Connecting to nervous-efficient-rebel at %s', nervousEfficientRebelUrl);
+    logger('Connecting to nervous-efficient-rebel at %s', nervousEfficientRebelUrl);
     return axios({
         method: 'post',
         url: nervousEfficientRebelUrl,
@@ -17,17 +17,17 @@ var extractEntities = (inputText) => {
     })
         .then(response => {
             var entities = response.data;
-            logger.silly('Extracted entities %j', entities);
+            logger('Extracted entities %j', entities);
             return entities;
         })
         .catch(error => {
-            logger.error('Error with nervous-efficient-rebel service');
+            logger('Error with nervous-efficient-rebel service');
             throw error;
         });
 };
 
 var article = (url) => {
-    logger.debug('Retrieving news article');
+    logger('Retrieving news article');
     return new Promise((resolve, reject) => {
         axios.get(url)
             .then(response => {
@@ -49,12 +49,12 @@ var article = (url) => {
                 var article = paragraphs.get().filter(paragraph => {
                     return _.trim(paragraph) !== '';
                 }).join('\n\n');
-                logger.silly('Retrieved article, %d characters', article.length);
+                logger('Retrieved article, %d characters', article.length);
                 resolve(article);
             })
             .catch(ex => {
-                logger.error('Could not get news article');
-                logger.info(ex);
+                logger('Could not get news article');
+                logger(ex);
                 reject(ex);
             });
     });
