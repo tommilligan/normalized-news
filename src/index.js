@@ -1,5 +1,3 @@
-require('dotenv-safe').load();
-
 import logger from './logger';
 import {anonymize, neutralize} from './passes';
 import {article} from './services';

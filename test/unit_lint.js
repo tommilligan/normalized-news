@@ -1,3 +1,5 @@
+require('dotenv-safe').load();
+
 var lint = require('mocha-eslint');
  
 // Array of paths to lint 
