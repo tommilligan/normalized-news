@@ -1526,11 +1526,9 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-"gender-neutral@https://github.com/tommilligan/gender-neutral#develop":
-  version "0.1.0"
-  resolved "https://github.com/tommilligan/gender-neutral#83ad9b292d1301332e1ed55f35336de617d20389"
-  dependencies:
-    postinstall-build "^5.0.1"
+gender-fluid@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/gender-fluid/-/gender-fluid-0.0.5.tgz#40da791f32507f20a1f5bde4e5b46ed278c11b3c"
 
 get-caller-file@^1.0.1:
   version "1.0.2"
@@ -2649,10 +2647,6 @@ pkg-dir@^1.0.0:
 pluralize@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
-
-postinstall-build@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/postinstall-build/-/postinstall-build-5.0.1.tgz#b917a9079b26178d9a24af5a5cd8cb4a991d11b9"
 
 prelude-ls@~1.1.2:
   version "1.1.2"

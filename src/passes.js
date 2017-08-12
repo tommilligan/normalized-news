@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
 var services = require('./services');
-var Gender = require('gender-neutral');
+var Gender = require('gender-fluid');
 
 var gn = new Gender();
 
@@ -39,7 +39,7 @@ var anonymize = (inputText) => {
  */
 var neutralize = (inputText) => {
     logger.debug('Neutralizing text');
-    return gn.neutralize(inputText);
+    return gn.fluidize(inputText);
 };
 
 export {neutralize, anonymize};

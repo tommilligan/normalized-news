@@ -37,7 +37,7 @@
     "cheerio": "^1.0.0-rc.2",
     "dotenv-safe": "^4.0.4",
     "express": "^4.15.3",
-    "gender-neutral": "https://github.com/tommilligan/gender-neutral#develop",
+    "gender-fluid": "^0.0.5",
     "lodash": "^4.17.4",
     "moxios": "^0.4.0",
     "winston": "^2.3.1",
