@@ -13,8 +13,14 @@ script:
   - npm run unit-cover
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-branches:
-  except:
-    - /v\d+\.\d+\.\d+/
+deploy:
+  - provider: npm
+    skip_cleanup: true
+    email: code@tommilligan.net
+    api_key: $NPM_API_KEY
+    on:
+      branch: master
+      tags: true
+      condition: $TRAVIS_NODE_VERSION = 7
 notifications:
   email: false
