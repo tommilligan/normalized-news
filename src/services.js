@@ -7,7 +7,7 @@ import logger from './logger';
 
 // External services
 var extractEntities = (inputText) => {
-    var nervousEfficientRebelUrl = `http://${process.env.NERVOUS_EFFICIENT_REBEL_HOST}:${process.env.NERVOUS_EFFICIENT_REBEL_PORT}/`;
+    var nervousEfficientRebelUrl = process.env.NERVOUS_EFFICIENT_REBEL_URL;
     logger('Connecting to nervous-efficient-rebel at %s', nervousEfficientRebelUrl);
     return axios({
         method: 'post',
