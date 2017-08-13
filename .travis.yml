@@ -10,7 +10,7 @@ install:
 before_script:
   - npm run compile
 script:
-  - npm run unit-cover
+  - npm run coverage
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 deploy:
