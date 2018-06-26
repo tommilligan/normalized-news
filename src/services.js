@@ -9,11 +9,14 @@ import logger from './logger';
 var extractEntities = (inputText) => {
     var nervousEfficientRebelUrl = process.env.NERVOUS_EFFICIENT_REBEL_URL;
     logger('Connecting to nervous-efficient-rebel at %s', nervousEfficientRebelUrl);
+    // Expected to be a stanford-ner-docker instance
+    // See https://github.com/lawinsider/stanford-ner-docker
     return axios({
-        method: 'post',
+        method: 'get',
         url: nervousEfficientRebelUrl,
-        data: {payload: inputText},
-        headers: {'Content-Type': 'application/json'}
+        params: {
+            query: inputText
+        }
     })
         .then(response => {
             var entities = response.data;

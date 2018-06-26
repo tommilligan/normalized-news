@@ -25,7 +25,8 @@ var provideCodenames = (entities, codenamingCounters = defaultCodenamingCounters
     logger('Providing codenames');
     var codenames = [];
     entitiesToReplace.map(namedEntityType => {
-        var foundEntities = entities[namedEntityType];
+        // We do not garuntee all entity keys are returned
+        var foundEntities = entities[namedEntityType] || [];
         var codenamingCounter = codenamingCounters[namedEntityType];
         if (codenamingCounter) {
             logger('Codenaming %ss', namedEntityType);

@@ -25,13 +25,8 @@ describe('integrate_services.js', function(){
             this.timeout(5000);
             var text = 'John Smith went to Tesco and bought spam';
             var expected = {
-                DATE:[],
-                LOCATION:[],
-                MONEY: [],
                 ORGANIZATION: ['Tesco'],
-                PERCENT: [],
                 PERSON: ['John Smith'],
-                TIME: []
             };
             return expect(extractEntities(text)).to.eventually.deep.equal(expected);
         });
