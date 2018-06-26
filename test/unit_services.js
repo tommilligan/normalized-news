@@ -63,13 +63,8 @@ describe('integrate_services.js', function(){
         it('extractEntities will return nervous-efficient-rebel response as object', function(){
             var text = 'John Smith went to Tesco and bought spam';
             var stubJson = {
-                DATE:[],
-                LOCATION:[],
-                MONEY: [],
                 ORGANIZATION: ['Tesco'],
-                PERCENT: [],
-                PERSON: ['John Smith'],
-                TIME: []
+                PERSON: ['John Smith']
             };
 
             moxios.wait(function () {
