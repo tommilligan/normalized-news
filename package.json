@@ -1,6 +1,6 @@
 {
   "name": "normalized-news",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Read the news with anonymized people, locations and organizations.",
   "author": "Tom Milligan <code@tommilligan.net>",
   "private": false,
