@@ -34,7 +34,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
-    "debug": "^3.1.0",
+    "debug": "^4.1.1",
     "express": "^4.16.3",
     "gender-fluid": "^0.0.5",
     "lodash": "^4.17.10"
