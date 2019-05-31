@@ -32,7 +32,7 @@
     "url": "git://github.com/tommilligan/normalized-news.git"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.2",
     "debug": "^4.1.1",
     "express": "^4.16.3",
